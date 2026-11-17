@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Leituras · {{ site.name }}{% endblock %}
+{% block content %}
+<section class="abertura">
+  <h1>Leituras</h1>
+  <p>O que estou lendo e o que já li, com uma nota sobre o que cada leitura mudou no meu trabalho.</p>
+</section>
+{% if not current and not finished %}
+<p class="vazio">Nenhuma leitura registrada ainda.</p>
+{% endif %}
+{% for title, readings in [("Lendo agora", current), ("Lidas", finished)] %}
+{% if readings %}
+<section class="grupo">
+  <h2 class="rotulo">{{ title }}</h2>
+  {% for reading, body in readings %}
+  <article class="item" id="{{ reading.slug }}">
+    <span class="tipo tipo-leitura">{{ reading.status | status }}{% if reading.finished %} em {{ reading.finished | data }}{% endif %}</span>
+    <div class="item-corpo">
+      <h3>{{ reading.title }}</h3>
+      <p class="meta">{{ reading.author }}{% if reading.theme %} · {{ reading.theme }}{% endif %}</p>
+      {% if body %}<div class="texto">{{ body }}</div>{% endif %}
+      {% if reading.recommended_for %}<p class="meta">Indico para: {{ reading.recommended_for }}</p>{% endif %}
+    </div>
+  </article>
+  {% endfor %}
+</section>
+{% endif %}
+{% endfor %}
+{% endblock %}

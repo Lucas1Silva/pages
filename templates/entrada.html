@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}{{ entry.title }} · {{ site.name }}{% endblock %}
+{% block description %}{{ entry.summary }}{% endblock %}
+{% block content %}
+<article class="pagina">
+  <header class="cabecalho">
+    <span class="tipo tipo-{{ entry.kind }}">{{ entry.kind | tipo }}</span>
+    <h1>{{ entry.title }}</h1>
+    <p class="meta">
+      <time datetime="{{ entry.date.isoformat() }}">{{ entry.date | data }}</time>
+      {% if project %} · Projeto: <a href="{{ url('projetos/' ~ project.slug ~ '/') }}">{{ project.title }}</a>{% endif %}
+      {% if reading %} · Leitura: <a href="{{ url('leituras/') }}#{{ reading.slug }}">{{ reading.title }}</a>{% endif %}
+    </p>
+  </header>
+  {% if body %}<div class="texto">{{ body }}</div>{% endif %}
+  {% if entry.images %}
+  <div class="galeria">
+    {% for image in entry.images %}
+    <figure><img src="{{ url('static/img/' ~ image.file) }}" alt="{{ image.alt }}" loading="lazy"></figure>
+    {% endfor %}
+  </div>
+  {% endif %}
+  <p class="voltar"><a href="{{ url() }}">Voltar ao diário</a></p>
+</article>
+{% endblock %}

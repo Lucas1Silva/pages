@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="abertura">
+  <h1>{{ site.description }}</h1>
+  <p>Cada entrada é um projeto, uma observação, uma leitura ou uma etapa da trajetória. A mais recente fica em cima.</p>
+</section>
+{% for month, entries in months %}
+<section class="grupo">
+  <h2 class="rotulo">{{ month }}</h2>
+  {% for entry in entries %}
+  {% with heading = "h3" %}{% include "_resumo.html" %}{% endwith %}
+  {% endfor %}
+</section>
+{% else %}
+<p class="vazio">Nenhuma entrada ainda.</p>
+{% endfor %}
+{% endblock %}

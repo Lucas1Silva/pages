@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Projetos · {{ site.name }}{% endblock %}
+{% block content %}
+<section class="abertura">
+  <h1>Projetos</h1>
+  <p>O que construí, com as decisões e o registro de cada um.</p>
+</section>
+{% for project in projects %}
+<article class="item">
+  <time datetime="{{ project.start.isoformat() }}">{{ project.start | data }}</time>
+  <div class="item-corpo">
+    <h2><a href="{{ url('projetos/' ~ project.slug ~ '/') }}">{{ project.title }}</a></h2>
+    <p>{{ project.summary }}</p>
+    {% if project.technologies %}<p class="meta">{{ project.technologies | join(" · ") }}</p>{% endif %}
+  </div>
+</article>
+{% else %}
+<p class="vazio">Nenhum projeto registrado ainda.</p>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{# No scripts, fonts or images from other sites: the page can only load files from this site. #}
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>{% block title %}{{ site.name }}{% endblock %}</title>
+<meta name="description" content="{% block description %}{{ site.description }}{% endblock %}">
+<link rel="stylesheet" href="{{ url('static/css/site.css') }}">
+</head>
+<body>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+<header class="topo">
+  <div class="largura topo-linha">
+    <a class="marca" href="{{ url() }}">{{ site.name }}</a>
+    <nav aria-label="Principal">
+      <a href="{{ url() }}"{% if section == "diario" %} aria-current="page"{% endif %}>Diário</a>
+      <a href="{{ url('projetos/') }}"{% if section == "projetos" %} aria-current="page"{% endif %}>Projetos</a>
+      <a href="{{ url('leituras/') }}"{% if section == "leituras" %} aria-current="page"{% endif %}>Leituras</a>
+      <a href="#sobre">Sobre</a>
+    </nav>
+  </div>
+</header>
+<main id="conteudo" class="largura">
+{% block content %}{% endblock %}
+</main>
+<footer id="sobre" class="rodape">
+  <div class="largura rodape-linha">
+    <div>
+      <h2>Sobre</h2>
+      <p>{{ site.about }}</p>
+    </div>
+    {% if site.linkedin or site.github %}
+    <ul class="contatos">
+      {% if site.linkedin %}<li><a href="{{ site.linkedin }}" rel="me">LinkedIn</a></li>{% endif %}
+      {% if site.github %}<li><a href="{{ site.github }}" rel="me">GitHub</a></li>{% endif %}
+    </ul>
+    {% endif %}
+  </div>
+</footer>
+</body>
+</html>

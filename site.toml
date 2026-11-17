@@ -1,0 +1,13 @@
+# Configurações do site. O gerador lê este arquivo a cada build.
+
+nome = "Lucas Silva"
+descricao = "Registro vivo do que construo, por onde passei e o que aprendi."
+sobre = "Engenheiro de dados sênior. Programo desde 2016."
+
+# Caminho onde o GitHub Pages serve o site. Como o repositório se chama "pages",
+# o endereço é https://lucas1silva.github.io/pages/
+caminho_base = "/pages/"
+
+# Endereços completos (https://). Deixe vazio para esconder o link.
+github = "https://github.com/Lucas1Silva"
+linkedin = ""

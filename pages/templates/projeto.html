@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}{{ project.title }} · {{ site.name }}{% endblock %}
+{% block description %}{{ project.summary }}{% endblock %}
+{% block content %}
+<article class="pagina">
+  <header class="cabecalho">
+    <span class="tipo tipo-projeto">Projeto</span>
+    <h1>{{ project.title }}</h1>
+    <p class="subtitulo">{{ project.summary }}</p>
+  </header>
+  <dl class="ficha">
+    <div><dt>Início</dt><dd>{{ project.start | data }}</dd></div>
+    {% if project.technologies %}<div><dt>Feito com</dt><dd>{{ project.technologies | join(", ") }}</dd></div>{% endif %}
+    {% if project.repository %}<div><dt>Código</dt><dd><a href="{{ project.repository }}">Repositório</a></dd></div>{% endif %}
+  </dl>
+  {% if project.images %}
+  <div class="galeria">
+    {% for image in project.images %}
+    <figure><img src="{{ url('static/img/' ~ image.file) }}" alt="{{ image.alt }}" loading="lazy"></figure>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% if body %}<div class="texto">{{ body }}</div>{% endif %}
+  {% if log %}
+  <section class="grupo">
+    <h2 class="rotulo">Registro do projeto</h2>
+    {% for entry in log %}
+    {% with heading = "h3" %}{% include "_resumo.html" %}{% endwith %}
+    {% endfor %}
+  </section>
+  {% endif %}
+</article>
+{% endblock %}

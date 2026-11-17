@@ -1,0 +1,12 @@
+{# One diary entry in a list. Expects: entry, heading ("h2" or "h3"). #}
+<article class="item">
+  <time datetime="{{ entry.date.isoformat() }}">{{ entry.date | data }}</time>
+  <div class="item-corpo">
+    <span class="tipo tipo-{{ entry.kind }}">{{ entry.kind | tipo }}</span>
+    <{{ heading }}><a href="{{ url('diario/' ~ entry.slug ~ '/') }}">{{ entry.title }}</a></{{ heading }}>
+    <p>{{ entry.summary }}</p>
+    {% if entry.images %}
+    <img class="miniatura" src="{{ url('static/img/' ~ entry.images[0].file) }}" alt="{{ entry.images[0].alt }}" loading="lazy">
+    {% endif %}
+  </div>
+</article>
